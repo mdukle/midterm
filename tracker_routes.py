@@ -20,7 +20,7 @@ async def get_all_reagents() -> list[Tracker]:
 async def create_new_reagent(reagent: TrackerRequest) -> Tracker:
     global global_id
     global_id += 1
-    new_reagent = Tracker(id=global_id, title=reagent.title, desc=reagent.desc)
+    new_reagent = Tracker(id=global_id, title=reagent.title, desc=reagent.desc, open_date=reagent.open_date, freezer=reagent.freezer)
     reagent_list.append(new_reagent)
     return new_reagent
 
@@ -33,6 +33,8 @@ async def edit_todo_by_id(
         if x.id == id:
             x.title = reagent.title
             x.desc = reagent.desc
+            x.open_date = reagent.open_date
+            x.freezer = reagent.freezer
             return x
 
     raise HTTPException(
@@ -65,7 +67,7 @@ async def delete_tracker_by_id(
         Path(
             gt=0,
             le=1000,
-            title="This is the ID for the desired Todo Item to be deleted",
+            title="This is the ID for the desired Reagent Item to be deleted",
         ),
     ],
 ) -> dict:
@@ -73,7 +75,7 @@ async def delete_tracker_by_id(
         reagent = reagent_list[i]
         if reagent.id == id:
             reagent_list.pop(i)
-            return {"msg": f"the Todo with ID={id} is deleted."}
+            return {"msg": f"the Reagent with ID={id} is deleted."}
     raise HTTPException(
         status_code=status.HTTP_404_NOT_FOUND, detail=f"Item with ID={id} is not found"
     )

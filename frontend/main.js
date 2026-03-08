@@ -9,9 +9,11 @@ document.getElementById('add-btn').addEventListener('click', (e) => {
     const msgDiv = document.getElementById('msg');
     const titleInput = document.getElementById('title');
     const descInput = document.getElementById('desc');
+    const dateInput = document.getElementById('open_date');
+    const freezerInput = document.getElementById('freezer');
 
-    if (!titleInput.value || !descInput.value) {
-        msgDiv.innerHTML = 'Please provide non-empty Title and Description when creating a new Reagent'
+    if (!titleInput.value || !descInput.value || !dateInput.value || !freezerInput.value) {
+        msgDiv.innerHTML = 'Please provide non-empty fields when adding a new Reagent'
         return;
     }
 
@@ -32,13 +34,16 @@ document.getElementById('add-btn').addEventListener('click', (e) => {
             msgDiv.innerHTML = '';
             titleInput.value = '';
             descInput.value = '';
+            dateInput.value = '';
+            freezerInput.value = '';
+
         }
     };
 
     // with POST, need to send a body with post
     xhr.open('POST', api, true);
     xhr.setRequestHeader('Content-Type', 'application/json;charset=UTF-8')
-    xhr.send(JSON.stringify({ title: titleInput.value, desc: descInput.value }));
+    xhr.send(JSON.stringify({ title: titleInput.value, desc: descInput.value, open_date: dateInput.value, freezer: freezerInput.value }));
 
 });
 
@@ -49,9 +54,11 @@ document.getElementById('edit-btn').addEventListener('click', (e) => {
     const msgDiv = document.getElementById('msgEdit');
     const titleInput = document.getElementById('titleEdit');
     const descInput = document.getElementById('descEdit');
+    const dateInput = document.getElementById('open_dateEdit');
+    const freezerInput = document.getElementById('freezerEdit');
 
-    if (!titleInput.value || !descInput.value) {
-        msgDiv.innerHTML = 'Please provide non-empty Title and Description when creating a new Reagent'
+    if (!titleInput.value || !descInput.value || !dateInput.value || !freezerInput.value) {
+        msgDiv.innerHTML = 'Please provide non-empty fields when adding a new Reagent'
         return;
     }
 
@@ -63,6 +70,8 @@ document.getElementById('edit-btn').addEventListener('click', (e) => {
             const reagent = data.find((x) => x.id == reagentIdInEdit);
             reagent.title = newReagent.title;
             reagent.desc = newReagent.desc;
+            reagent.open_date = newReagent.open_date;
+            reagent.freezer = newReagent.freezer;
             renderReagents(data);
 
             // close modal dialog
@@ -74,13 +83,15 @@ document.getElementById('edit-btn').addEventListener('click', (e) => {
             msgDiv.innerHTML = '';
             titleInput.value = '';
             descInput.value = '';
+            dateInput.value = '';
+            freezerInput.value = '';
         }
     };
 
     // with POST, need to send a body with post
     xhr.open('PUT', api + "/" + reagentIdInEdit, true);
     xhr.setRequestHeader('Content-Type', 'application/json;charset=UTF-8')
-    xhr.send(JSON.stringify({ title: titleInput.value, desc: descInput.value }));
+    xhr.send(JSON.stringify({ title: titleInput.value, desc: descInput.value, open_date: dateInput.value, freezer: freezerInput.value }));
 
 })
 
@@ -110,7 +121,9 @@ function renderReagents(data) {
         reagentDiv.innerHTML += `
         <div id = "reagent-${x.id}" class="reagent-box">
             <div class = "fw-bold fs-4">${x.title}</div>
-            <pre class = "text-secondary ps-3">${x.desc}</pre>
+            <div class = "text-secondary ps-3 detail-row"><strong>Date Opened:</strong> ${x.open_date}</div>
+            <div class = "text-secondary ps-3 detail-row"><strong>Freezer Stored In:</strong> ${x.freezer}</div>
+            <div class = "text-secondary ps-3 detail-row"><strong>Notes/Other Information:</strong> ${x.desc}</div>
             <div>
                 <button type="button" class = "btn btn-success btn-sm"
                     data-bs-toggle="modal"
@@ -149,3 +162,11 @@ function getAllReagents() {
 (() => {
     getAllReagents()
 })();
+
+document.addEventListener("DOMContentLoaded", () => {
+    const addModalClear = document.getElementById("modal-add");
+    addModalClear.addEventListener("hidden.bs.modal", () => {
+        const msgDiv = document.getElementById("msg");
+        msgDiv.innerHTML = "";
+    });
+});
