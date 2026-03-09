@@ -128,13 +128,13 @@ function renderReagents(data) {
                 <button type="button" class = "btn btn-success btn-sm"
                     data-bs-toggle="modal"
                     data-bs-target="#modal-edit"
-                    onClick="setReagentInEdit(${x.id})"
-                >
+                    onClick="setReagentInEdit(${x.id})">
+                    <i class="bi bi-pencil-square"></i>
                     Edit
                 </button>
                 <button type="button" class = "btn btn-danger btn-sm"
-                    onClick='deleteReagent(${x.id})'
-                >
+                    onClick='deleteReagent(${x.id})'>
+                    <i class="bi bi-trash"></i>
                 Delete
                 </button>
             </div>
