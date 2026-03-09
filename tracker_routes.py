@@ -20,7 +20,7 @@ async def get_all_reagents() -> list[Tracker]:
 async def create_new_reagent(reagent: TrackerRequest) -> Tracker:
     global global_id
     global_id += 1
-    new_reagent = Tracker(id=global_id, title=reagent.title, desc=reagent.desc, open_date=reagent.open_date, freezer=reagent.freezer)
+    new_reagent = Tracker(id=global_id, title=reagent.title, desc=reagent.desc, open_date=reagent.open_date, freezer=reagent.freezer, protocol=reagent.protocol)
     reagent_list.append(new_reagent)
     return new_reagent
 
@@ -35,6 +35,7 @@ async def edit_todo_by_id(
             x.desc = reagent.desc
             x.open_date = reagent.open_date
             x.freezer = reagent.freezer
+            x.protocol = reagent.protocol
             return x
 
     raise HTTPException(

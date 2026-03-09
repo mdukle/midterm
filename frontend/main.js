@@ -11,8 +11,9 @@ document.getElementById('add-btn').addEventListener('click', (e) => {
     const descInput = document.getElementById('desc');
     const dateInput = document.getElementById('open_date');
     const freezerInput = document.getElementById('freezer');
+    const protocolInput = document.getElementById('protocol');
 
-    if (!titleInput.value || !descInput.value || !dateInput.value || !freezerInput.value) {
+    if (!titleInput.value || !descInput.value || !dateInput.value || !freezerInput.value || !protocolInput.value) {
         msgDiv.innerHTML = 'Please provide non-empty fields when adding a new Reagent'
         return;
     }
@@ -36,6 +37,7 @@ document.getElementById('add-btn').addEventListener('click', (e) => {
             descInput.value = '';
             dateInput.value = '';
             freezerInput.value = '';
+            protocolInput.value = '';
 
         }
     };
@@ -43,7 +45,7 @@ document.getElementById('add-btn').addEventListener('click', (e) => {
     // with POST, need to send a body with post
     xhr.open('POST', api, true);
     xhr.setRequestHeader('Content-Type', 'application/json;charset=UTF-8')
-    xhr.send(JSON.stringify({ title: titleInput.value, desc: descInput.value, open_date: dateInput.value, freezer: freezerInput.value }));
+    xhr.send(JSON.stringify({ title: titleInput.value, desc: descInput.value, open_date: dateInput.value, freezer: freezerInput.value, protocol: protocolInput.value }));
 
 });
 
@@ -56,8 +58,9 @@ document.getElementById('edit-btn').addEventListener('click', (e) => {
     const descInput = document.getElementById('descEdit');
     const dateInput = document.getElementById('open_dateEdit');
     const freezerInput = document.getElementById('freezerEdit');
+    const protocolInput = document.getElementById('protocolEdit');
 
-    if (!titleInput.value || !descInput.value || !dateInput.value || !freezerInput.value) {
+    if (!titleInput.value || !descInput.value || !dateInput.value || !freezerInput.value || !protocolInput.value) {
         msgDiv.innerHTML = 'Please provide non-empty fields when adding a new Reagent'
         return;
     }
@@ -72,6 +75,7 @@ document.getElementById('edit-btn').addEventListener('click', (e) => {
             reagent.desc = newReagent.desc;
             reagent.open_date = newReagent.open_date;
             reagent.freezer = newReagent.freezer;
+            reagent.protocol = newReagent.protocol;
             renderReagents(data);
 
             // close modal dialog
@@ -91,7 +95,7 @@ document.getElementById('edit-btn').addEventListener('click', (e) => {
     // with POST, need to send a body with post
     xhr.open('PUT', api + "/" + reagentIdInEdit, true);
     xhr.setRequestHeader('Content-Type', 'application/json;charset=UTF-8')
-    xhr.send(JSON.stringify({ title: titleInput.value, desc: descInput.value, open_date: dateInput.value, freezer: freezerInput.value }));
+    xhr.send(JSON.stringify({ title: titleInput.value, desc: descInput.value, open_date: dateInput.value, freezer: freezerInput.value, protocol: protocolInput.value }));
 
 })
 
@@ -112,6 +116,14 @@ function deleteReagent(id) {
 
 function setReagentInEdit(id) {
     reagentIdInEdit = id;
+
+    const reagent = data.find(r => r.id == id);
+
+    document.getElementById('titleEdit').value = reagent.title;
+    document.getElementById('descEdit').value = reagent.desc;
+    document.getElementById('open_dateEdit').value = reagent.open_date;
+    document.getElementById('freezerEdit').value = reagent.freezer;
+    document.getElementById('protocolEdit').value = reagent.protocol;
 }
 
 function renderReagents(data) {
@@ -122,8 +134,9 @@ function renderReagents(data) {
         <div id = "reagent-${x.id}" class="reagent-box">
             <div class = "fw-bold fs-4">${x.title}</div>
             <div class = "text-secondary ps-3 detail-row"><strong>Date Opened:</strong> ${x.open_date}</div>
-            <div class = "text-secondary ps-3 detail-row"><strong>Freezer Stored In:</strong> ${x.freezer}</div>
+            <div class = "text-secondary ps-3 detail-row"><strong>Freezer Stored In:</strong> ${x.freezer}&deg;C</div>
             <div class = "text-secondary ps-3 detail-row"><strong>Notes/Other Information:</strong> ${x.desc}</div>
+            <div class = "text-secondary ps-3 detail-row"><strong>Protocols Commonly Used In:</strong> ${x.protocol}</div>
             <div>
                 <button type="button" class = "btn btn-success btn-sm"
                     data-bs-toggle="modal"

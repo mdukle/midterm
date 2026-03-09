@@ -48,6 +48,11 @@
                             <input type="text" class="form-control" id="freezer">
                         </div>
                         <div class="mb-3">
+                            <label for="protocol" class="form-label">What Protocols is this Reagent Commonly Used
+                                In?</label>
+                            <input type="text" class="form-control" id="protocol">
+                        </div>
+                        <div class="mb-3">
                             <label for="desc" class="form-label">Notes/Other Information</label>
                             <textarea class="form-control" id="desc" rows="3"></textarea>
                         </div>
@@ -74,22 +79,27 @@
                 <div class="modal-body">
                     <div id="edit-reagent-form">
                         <div class="mb-3">
-                            <label for="title" class="form-label">Name of Reagent</label>
-                            <input type="text" class="form-control" id="title">
+                            <label for="titleEdit" class="form-label">Name of Reagent</label>
+                            <input type="text" class="form-control" id="titleEdit">
                         </div>
                         <div class="mb-3">
-                            <label for="open_date" class="form-label">When was the Reagent Opened?</label>
-                            <input type="date" id="open_date" name="open_date"></textarea>
+                            <label for="open_dateEdit" class="form-label">When was the Reagent Opened?</label>
+                            <input type="date" id="open_dateEdit" name="open_dateEdit"></textarea>
                         </div>
                         <div class="mb-3">
-                            <label for="freezer" class="form-label">Which Freezer is the Reagent Stored In?</label>
-                            <input type="text" class="form-control" id="freezer">
+                            <label for="freezerEdit" class="form-label">Which Freezer is the Reagent Stored In?</label>
+                            <input type="text" class="form-control" id="freezerEdit">
                         </div>
                         <div class="mb-3">
-                            <label for="desc" class="form-label">Notes/Other Information</label>
-                            <textarea class="form-control" id="desc" rows="3"></textarea>
+                            <label for="protocolEdit" class="form-label">What Protocols is this Reagent Commonly Used
+                                In?</label>
+                            <input type="text" class="form-control" id="protocolEdit">
                         </div>
-                        <div class='text-danger' id='msg'></div>
+                        <div class="mb-3">
+                            <label for="descEdit" class="form-label">Notes/Other Information</label>
+                            <textarea class="form-control" id="descEdit" rows="3"></textarea>
+                        </div>
+                        <div class='text-danger' id='msgEdit'></div>
                     </div>
                 </div>
                 <div class="modal-footer">

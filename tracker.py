@@ -8,6 +8,7 @@ class Tracker(BaseModel):
     desc: str
     open_date: date
     freezer: str
+    protocol: str
 
 
 class TrackerRequest(BaseModel):
@@ -15,3 +16,4 @@ class TrackerRequest(BaseModel):
     desc: str
     open_date: date
     freezer: str
+    protocol: str
