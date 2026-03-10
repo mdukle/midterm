@@ -129,14 +129,14 @@ function setReagentInEdit(id) {
 function renderReagents(data) {
     const reagentDiv = document.getElementById("reagents");
     reagentDiv.innerHTML = ''
-    data.sort((a, b) => b.id - a.id).forEach(x => {
+    data.sort((a, b) => new Date(b.open_date) - new Date(a.open_date)).forEach(x => {
         reagentDiv.innerHTML += `
         <div id = "reagent-${x.id}" class="reagent-box">
             <div class = "fw-bold fs-4">${x.title}</div>
             <div class = "text-secondary ps-3 detail-row"><strong>Date Opened:</strong> ${x.open_date}</div>
             <div class = "text-secondary ps-3 detail-row"><strong>Freezer Stored In:</strong> ${x.freezer}&deg;C</div>
-            <div class = "text-secondary ps-3 detail-row"><strong>Notes/Other Information:</strong> ${x.desc}</div>
             <div class = "text-secondary ps-3 detail-row"><strong>Protocols Commonly Used In:</strong> ${x.protocol}</div>
+            <div class = "text-secondary ps-3 detail-row"><strong>Notes/Other Information:</strong> ${x.desc}</div>
             <div>
                 <button type="button" class = "btn btn-success btn-sm"
                     data-bs-toggle="modal"
