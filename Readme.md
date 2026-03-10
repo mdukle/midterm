@@ -29,17 +29,19 @@ Styling was achieved via Bootstrap 5 for a cleaner layout. I used JS and XHR to 
 ## CRUD Application: Create, Read, Update, Delete
 The backend is built with FastAPI and a list for memory. It utilizes APIRouter and Pydantic for data validation. This Lab Reagent Tracker is a CRUD Application and has all the functions of one. Users are currently reading all entries as they are displayed onto the screen, once they are made (GET API call). Reagents are displayed in chronological order, and the most recently opened ones are at the top of the list, since this is what users will be using most frequently. It also allows them to make any edits and add notes in the text sections, such as if a reagent is running low and we need to order more. Users can create new reagents to add to the tracker by clicking the "Add Reagent" button in the top right (POST API call). They can also edit a reagent by clicking the "Edit" button in the bottom left of each card (PUT API call) or delete the reagent by the "Delete" button (DELETE API call). When editing, users can update any of the fields and then click the "Yes, Update It" button to save or the "Close" button to discard changes. 
 
-#### Code snippet:
-
-Example of CRUD Code: ![Code output](screenshots/crud_example_image.png)
-
-
-#### App Images:
+#### Code snippet followed by App Images:
 
 Whole App: ![Whole App Image](screenshots/app_image.png)
 
+
+Example of CRUD Code for the Add feature: ![Code snippet](screenshots/crud_add_code.png)
+
 Add Modal:
 ![Add Modal Image](screenshots/add_modal_image.png)
+
+
+Example of CRUD Code for the Edit feature: ![Code snippet](screenshots/crud_example_image.png)
+
 
 Edit Modal:
 ![Edit Modal Image](screenshots/edit_modal_image.png)
